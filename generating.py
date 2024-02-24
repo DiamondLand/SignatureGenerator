@@ -6,7 +6,7 @@ def create_signatures(firstname: str, lastname: str, user_id: int):
     image = Image.new("RGB", (width, height), "white")
     draw = ImageDraw.Draw(image)
 
-    font_number = random.randint(1, 5)
+    font_number = random.randint(1, 7)
     font_path = f"assets/{font_number}.ttf"
     font_size = 50
     font = ImageFont.truetype(font_path, font_size)

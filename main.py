@@ -12,7 +12,7 @@ from kb import form_cancel_kb, cancel_button_kb
 from states_group import GetInfo, not_in_state_filter
 from generating import create_signatures
 
-bot = Bot(token="", parse_mode=ParseMode.HTML)
+bot = Bot(token="6741119014:AAHbiM9bKqTRK36ijLMG5FR1albizZN0vPw", parse_mode=ParseMode.HTML)
 
 dp = Dispatcher()
 
@@ -26,7 +26,7 @@ async def main():
 # --- Основная панель -> Ввод имени ---
 @dp.message(not_in_state_filter, Command("start", "generate"))
 async def cmd_start(message: Message, state: FSMContext):
-    await message.answer(text="<b>Давай знакомиться 💕!</b>\n\nКак тебя зовут? Введи имя в чат:", reply_markup=form_cancel_kb())
+    await message.answer(text="<b>Давайте знакомиться!</b>\n\nКак Вас зовут? Введите имя в чат:", reply_markup=form_cancel_kb())
     await state.set_state(GetInfo.firstname)
 
 
@@ -59,7 +59,7 @@ async def step_firstname(message: Message, state: FSMContext):
         data['firstname'] = message_text
         await state.update_data(data)
 
-        await message.answer(text=f"Супер, {message_text}, введи свою фамилию:")
+        await message.answer(text=f"Супер, {message_text}, введите свою фамилию:")
         await state.set_state(GetInfo.lastname)
     else:
         await message.answer(text="Некорректно введено имя!")
@@ -87,7 +87,7 @@ async def step_lastname(message: Message, state: FSMContext):
         )
         await message.answer_photo(
             photo=FSInputFile(f"assets/users_signature/{message.from_user.id}_{font_number}.png"),
-            caption=f"Рад знакомству, {firstname} {lastname} 💖!",
+            caption=f"Рад знакомству, {firstname} {lastname}!",
             reply_markup=ReplyKeyboardRemove()
         )
         await state.clear()
